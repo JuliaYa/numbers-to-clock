@@ -11,9 +11,10 @@ const emojiHash = {
   9: '&#128344;'
 };
 
+let convertedStr = '';
+
 function convert() {
   const str = document.getElementById('numbers').value;
-  let convertedStr = '';
 
   str.trim()
     .split('').forEach(char => {
@@ -26,4 +27,16 @@ function convert() {
   });
 
   document.getElementById('result').innerHTML = convertedStr;
+  document.getElementById("copyBtn").style.visibility = 'visible';
 }
+
+function copy() {
+  var range = document.createRange();
+  range.selectNode(document.getElementById("result"));
+  window.getSelection().removeAllRanges();
+  window.getSelection().addRange(range);
+  document.execCommand("copy");
+  window.getSelection().removeAllRanges();
+}
+
+document.getElementById("copyBtn").addEventListener("click", copy)
